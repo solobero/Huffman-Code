@@ -1,15 +1,15 @@
 #include <iostream>
-#include <fcntl.h>    // Para open, O_RDONLY, etc.
-#include <unistd.h>   // Para read, close, etc.
-#include <sys/stat.h> // Para mode_t (opcional, dependiendo de tu sistema)
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
 #include "huff.h"
 #include "file_io.h"
-#define BUFFER_SIZE 1024 // Definir BUFFER_SIZE si no está definido
 
+#define BUFFER_SIZE 1024
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
@@ -51,12 +51,12 @@ int main(int argc, char* argv[]) {
         // Deserializar el árbol de Huffman
         HuffmanNode* root = deserializeHuffmanTree(fdHuff);
 
-        // Leer el contenido comprimido
-        std::string compressedContent;
+        // Leer el contenido comprimido (bytes binarios)
+        std::vector<char> compressedBytes;
         char buffer[BUFFER_SIZE];
         ssize_t bytesRead;
         while ((bytesRead = read(fdHuff, buffer, BUFFER_SIZE)) > 0) {
-            compressedContent.append(buffer, bytesRead);
+            compressedBytes.insert(compressedBytes.end(), buffer, buffer + bytesRead);
         }
 
         close(fdHuff);
@@ -65,7 +65,8 @@ int main(int argc, char* argv[]) {
         huffmanTable.clear();
         generateHuffmanCodes(root, "");
 
-        std::string decompressedContent = decompressText(compressedContent, root);
+        // Descomprimir los bytes binarios
+        std::string decompressedContent = decompressText(compressedBytes, root);
         writeDecompressedFile("archivo_descomprimido.txt", decompressedContent);
 
         delete root;

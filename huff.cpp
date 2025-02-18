@@ -1,8 +1,8 @@
 #include "huff.h"
 #include <algorithm>
+#include <bitset> // Incluir la biblioteca bitset
 
 std::unordered_map<char, std::string> huffmanTable;
-
 
 HuffmanNode::HuffmanNode(char val, int freq) {
     value = val;
@@ -71,14 +71,22 @@ std::string compressText(const std::string& fileContent) {
     return compressedText;
 }
 
-std::string decompressText(const std::string& compressedContent, HuffmanNode* root) {
+std::string decompressText(const std::vector<char>& compressedBytes, HuffmanNode* root) {
+    // Convertir los bytes binarios en una cadena de bits
+    std::string compressedBits;
+    for (char byte : compressedBytes) {
+        compressedBits += std::bitset<8>(static_cast<unsigned char>(byte)).to_string();
+    }
+
+    // Crear la tabla inversa de Huffman
     std::unordered_map<std::string, char> reverseHuffmanTable;
     for (const auto& pair : huffmanTable) {
         reverseHuffmanTable[pair.second] = pair.first;
     }
 
+    // Descomprimir la cadena de bits
     std::string tempCode, decodedText;
-    for (char bit : compressedContent) {
+    for (char bit : compressedBits) {
         tempCode += bit;
 
         if (reverseHuffmanTable.count(tempCode)) {

@@ -1,5 +1,5 @@
-#ifndef HUFFMAN_H
-#define HUFFMAN_H
+#ifndef HUFF_H
+#define HUFF_H
 
 #include <string>
 #include <vector>
@@ -21,6 +21,6 @@ void sortNodeList(std::vector<HuffmanNode*>& nodeList);
 void generateHuffmanCodes(HuffmanNode* root, const std::string& code);
 HuffmanNode* buildHuffmanTree(std::vector<HuffmanNode*>& nodeList);
 std::string compressText(const std::string& fileContent);
-std::string decompressText(const std::string& compressedContent, HuffmanNode* root);
+std::string decompressText(const std::vector<char>& compressedBytes, HuffmanNode* root); // Cambiado a std::vector<char>
 
-#endif // HUFFMAN_H 
+#endif // HUFF_H

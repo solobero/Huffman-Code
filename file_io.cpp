@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <iostream>
+#include <bitset>
+#include <vector>
 
 #define BUFFER_SIZE 1024
 
@@ -31,25 +33,25 @@ std::string readFile(const char* filename) {
 
 void writeCompressedFiles(const std::string& filename, const std::string& compressedContent, HuffmanNode* root) {
     std::string huffFilename = filename + ".huff";
-    std::string txtFilename = filename + "_compressed.txt";
 
     int fdHuff = open(huffFilename.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    int fdTxt = open(txtFilename.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-
-    if (fdHuff == -1 || fdTxt == -1) {
-        perror("Error al abrir los archivos para escritura");
+    if (fdHuff == -1) {
+        perror("Error al abrir el archivo .huff para escritura");
         return;
     }
 
+    // Serializar el árbol de Huffman
     serializeHuffmanTree(root, fdHuff);
-    write(fdHuff, compressedContent.c_str(), compressedContent.size());
-    write(fdTxt, compressedContent.c_str(), compressedContent.size());
+
+    // Convertir la cadena de bits en bytes binarios
+    std::vector<char> bytes = bitsToBytes(compressedContent);
+
+    // Escribir los bytes binarios en el archivo .huff
+    write(fdHuff, bytes.data(), bytes.size());
 
     std::cout << "Archivo comprimido guardado como: " << huffFilename << "\n";
-    std::cout << "Archivo de texto con el binario comprimido guardado como: " << txtFilename << "\n";
 
     close(fdHuff);
-    close(fdTxt);
 }
 
 void writeDecompressedFile(const std::string& filename, const std::string& decompressedContent) {
@@ -99,4 +101,25 @@ HuffmanNode* deserializeHuffmanTree(int fd) {
         node->right = right;
         return node;
     }
+}
+
+std::vector<char> bitsToBytes(const std::string& bits) {
+    std::vector<char> bytes;
+    for (size_t i = 0; i < bits.size(); i += 8) {
+        std::string byteStr = bits.substr(i, 8); // Toma 8 bits
+        if (byteStr.size() < 8) {
+            byteStr.append(8 - byteStr.size(), '0'); // Rellena con ceros si es necesario
+        }
+        char byte = static_cast<char>(std::bitset<8>(byteStr).to_ulong());
+        bytes.push_back(byte);
+    }
+    return bytes;
+}
+
+std::string bytesToBits(const std::vector<char>& bytes) {
+    std::string bits;
+    for (char byte : bytes) {
+        bits += std::bitset<8>(byte).to_string();
+    }
+    return bits;
 }
