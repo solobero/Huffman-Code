@@ -27,6 +27,9 @@ Aquí por ejemplo, agrupamos los dos nodos padres para crear otro nodo más
 
 ![Image](https://github.com/user-attachments/assets/adfc7b47-adea-4938-ae9e-2ff749f7263b)
 
+Al final queda un único nodo padre con varias hojas hijas, que son las que representan el árbol binario para codificar el mensaje
+
+![Image](https://github.com/user-attachments/assets/d9b43dc4-8960-4328-92ef-0262119f3a46)
 ## Uso de Llamadas al Sistema
 
 ## Comandos para ejecutar
