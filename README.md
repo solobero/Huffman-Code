@@ -17,7 +17,13 @@ Identificamos cuantas veces aparace cada letra en la palabra "programa", despué
 
 ![Image](https://github.com/user-attachments/assets/bb95b3cb-89e3-4d9c-96f1-658cc4cc68d4)
 
-Transformamos la estructura en una lista y la mantenemos ordenada de menor a mayor según la frecuencia de las letras de la palabra. Después formamos grupos de dos nodos para crear un nuevo nodo padre con el símbolo NULL, pero la cantidad de apariciones de ese nodo padre es la suma de los dos nodos hijos.
+Transformamos la estructura en una lista y la mantenemos ordenada de menor a mayor según la frecuencia de las letras de la palabra. Después formamos grupos de dos nodos para crear un nuevo nodo padre con el símbolo NULL, pero la cantidad de apariciones de ese nodo padre es la suma de los dos nodos hijos. El nuevo nodo lo ingresamos en la lista y procedemos a agrupar de a dos nodos como se hizo anteriormente. Realizamos esto hasta que solo quede un nodo.
+
+![Image](https://github.com/user-attachments/assets/94c4d047-2814-4559-81a4-65df1bc35448)
+
+Aquí por ejemplo, agrupamos los dos nodos padres para crear otro nodo más
+
+![Image](https://github.com/user-attachments/assets/fef231d9-7f53-4cb4-9403-4e5a57d75219)
 
 ## Uso de Llamadas al Sistema
 
