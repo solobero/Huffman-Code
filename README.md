@@ -14,7 +14,10 @@ El algoritmo consiste en la creación de un árbol binario que tiene cada uno de
 ![Image](https://github.com/user-attachments/assets/9907ee41-14e0-48c8-8d99-27e857477dfc)
 
 Identificamos cuantas veces aparace cada letra en la palabra "programa", después de esto ordenamos esta frecuencia de menor a mayor como se indica en la imagen
+
 ![Image](https://github.com/user-attachments/assets/bb95b3cb-89e3-4d9c-96f1-658cc4cc68d4)
+
+Transformamos la estructura en una lista y la mantenemos ordenada de menor a mayor según la frecuencia de las letras de la palabra. Después formamos grupos de dos nodos para crear un nuevo nodo padre con el símbolo NULL, pero la cantidad de apariciones de ese nodo padre es la suma de los dos nodos hijos.
 
 ## Uso de Llamadas al Sistema
 
