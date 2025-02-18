@@ -11,4 +11,4 @@ El algoritmo consiste en la creación de un árbol binario que tiene cada uno de
 3. Se repite el paso 2 hasta que sólo quede un árbol. Con este árbol se puede conocer el código asociado a un símbolo, así como obtener el símbolo asociado a un determinado código.
 
 ## Ejemplo
-
+![Image](https://github.com/user-attachments/assets/9907ee41-14e0-48c8-8d99-27e857477dfc)
