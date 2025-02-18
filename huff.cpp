@@ -42,8 +42,9 @@ void generateHuffmanCodes(HuffmanNode* root, const std::string& code) {
 }
 
 HuffmanNode* buildHuffmanTree(std::vector<HuffmanNode*>& nodeList) {
+    sortNodeList(nodeList);
     while (nodeList.size() > 1) {
-        sortNodeList(nodeList);
+        
 
         HuffmanNode* leftNode = nodeList[0];
         HuffmanNode* rightNode = nodeList[1];
