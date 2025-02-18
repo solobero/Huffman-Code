@@ -25,6 +25,8 @@ Aquí por ejemplo, agrupamos los dos nodos padres para crear otro nodo más
 
 ![Image](https://github.com/user-attachments/assets/fef231d9-7f53-4cb4-9403-4e5a57d75219)
 
+![Image](https://github.com/user-attachments/assets/adfc7b47-adea-4938-ae9e-2ff749f7263b)
+
 ## Uso de Llamadas al Sistema
 
 ## Comandos para ejecutar
