@@ -30,6 +30,18 @@ Aquí por ejemplo, agrupamos los dos nodos padres para crear otro nodo más
 Al final queda un único nodo padre con varias hojas hijas, que son las que representan el árbol binario para codificar el mensaje
 
 ![Image](https://github.com/user-attachments/assets/d9b43dc4-8960-4328-92ef-0262119f3a46)
+
+Ahora para codificar el mensaje, ponemos un "0" a los lazos que van hacía la izquierda, y un "1" a los lazos que van a la derecha.
+
+![Image](https://github.com/user-attachments/assets/c4a2e36f-d0dd-45f8-a76d-63e495d6503d)
+
+El código que se asocia a cada símbolo del mensaje original, equivale al camino que se recorre desde la raiz del árbol hasta la hoja que contiene ese símbolo.
+
+![Image](https://github.com/user-attachments/assets/9354b862-a0e5-49cf-8f3a-c21409b9c5ae)
+
+Por último, le damos los valores de Huffman a cada símbolo del mensaje original y así obtendremos el mensaje comprimido con el algoritmo de Huffman.
+
+![Image](https://github.com/user-attachments/assets/a92459ea-837a-49b1-adaa-ba1b73c472ab)
 ## Uso de Llamadas al Sistema
 
 ## Comandos para ejecutar
