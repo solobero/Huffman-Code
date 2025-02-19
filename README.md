@@ -46,5 +46,6 @@ Por último, le damos los valores de Huffman a cada símbolo del mensaje origina
 
 ## Comandos para ejecutar
 Para ejecutar el código del algoritmo de Huffman podemos usar el comando "make" para ejecutar todo el código en su totalidad:
+
 `make`
 
