@@ -44,6 +44,22 @@ Por último, le damos los valores de Huffman a cada símbolo del mensaje origina
 ![Image](https://github.com/user-attachments/assets/a92459ea-837a-49b1-adaa-ba1b73c472ab)
 ## Uso de Llamadas al Sistema
 
+```
+int fd = open(filename, O_RDONLY);
+```
+
+```
+read(fd, buffer, BUFFER_SIZE);
+```
+
+```
+write(fd, compressedContent.c_str(), compressedContent.size());
+```
+
+```
+close(fd);
+```
+
 ## Comandos para ejecutar
 Para ejecutar el código del algoritmo de Huffman podemos usar el comando "make" para ejecutar todo el código en su totalidad:
 
@@ -58,12 +74,13 @@ g++ -c huffman.cpp -o huffman.o
 g++ main.o huffman.o file_io.o -o huffman_programa
 ```
 
-Por último para comprimir un archivo de texto y descomprimilo se usarían los siguientes comandos respectivamente:
+Por último para comprimir un archivo de texto y descomprimirlo se usarían los siguientes comandos respectivamente:
 
 ```
 /huffman_programa -c archivo.txt 
 /huffman_programa -x archivo.txt .huff
 ```
 
+Los comandos que se pueden usar son:
 
 
