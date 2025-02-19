@@ -56,5 +56,14 @@ g++ -c main.cpp -o main.o
 g++ -c file_io.cpp -o file_io.o
 g++ -c huffman.cpp -o huffman.o
 g++ main.o huffman.o file_io.o -o huffman_programa
+```
+
+Por último para comprimir un archivo de texto y descomprimilo se usarían los siguientes comandos respectivamente:
+
+```
+/huffman_programa -c archivo.txt 
+/huffman_programa -x archivo.txt .huff
+```
+
 
 
