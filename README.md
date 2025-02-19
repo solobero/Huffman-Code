@@ -51,5 +51,10 @@ Para ejecutar el código del algoritmo de Huffman podemos usar el comando "make"
 
 Si se quiere ejecutar manualmente archivo por archivo se usarían:
 
-``` g++ -c main.cpp -o main.o
+```
+g++ -c main.cpp -o main.o
+g++ -c file_io.cpp -o file_io.o
+g++ -c huffman.cpp -o huffman.o
+g++ main.o huffman.o file_io.o -o huffman_programa
+
 
