@@ -54,39 +54,39 @@ int fdTxt = open(txtFilename.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_
 Se usa con los flags O_RDONLY para lectura o O_WRONLY | O_CREAT | O_TRUNC para escritura, creación y truncamiento si el archivo ya existe.
 
 ```cpp
-read(fd, buffer, BUFFER_SIZE); 
+read(fd, buffer, BUFFER_SIZE); # Lee el archivo txt en grandes en partes
 
-read(fd, &marker, 1);
+read(fd, &marker, 1); # Se usa para saber si es un nodo hoja o interno
 
-read(fd, &value, sizeof(char));
+read(fd, &value, sizeof(char)); # Leer el carácter almacenado en el nodo hoja
 
-read(fd, &repetitions, sizeof(int));
+read(fd, &repetitions, sizeof(int)); # Leer la frecuencia del carácter
 ```
 
 Se leen los datos desde el archivo txt el cual vamos a comprimir y se almacena en variables o buffers. Cada llamada a read() cumple una función específica en la manipulación del archivo comprimido y del árbol de Huffman
 
+```cpp
+write(fd, compressedContent.c_str(), compressedContent.size()); # Guarda la versión comprimida del archivo
+
+write(fdHuff, compressedContent.c_str(), compressedContent.size()); # Guarda la versión comprimida en .huff
+
+write(fdTxt, compressedContent.c_str(), compressedContent.size()); # Guarda la versión comprimida en .txt
+
+write(fd, decompressedContent.c_str(), decompressedContent.size()); # Guarda el texto original
+
+write(fd, "1", 1); # Serialización del árbol de Huffman (nodo hoja)
+write(fd, &root->value, sizeof(char)); # Guarda el carácter en una hoja
+write(fd, &root->repetitions, sizeof(int)); # Guarda la frecuencia del carácter
+
+write(fd, "0", 1); # Serialización del árbol de Huffman (nodo interno )
 ```
-write(fd, compressedContent.c_str(), compressedContent.size());
 
- write(fdHuff, compressedContent.c_str(), compressedContent.size());
+```cpp
+close(fd); # Cierra el descriptor del archivo después de leer/escribir
 
-write(fdTxt, compressedContent.c_str(), compressedContent.size());
+close(fdHuff); # Asegura que los datos comprimidos se guarden correctamente
 
-write(fd, decompressedContent.c_str(), decompressedContent.size());
-
-write(fd, "1", 1);
-write(fd, &root->value, sizeof(char));
-write(fd, &root->repetitions, sizeof(int));
-
-write(fd, "0", 1);
-```
-
-```
-close(fd);
-
-close(fdHuff);
-
- close(fdTxt);
+ close(fdTxt); # Finaliza la escritura del archivo comprimido en texto
 ```
 
 ## Comandos para ejecutar
