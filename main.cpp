@@ -1,25 +1,49 @@
 #include <iostream>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/stat.h>
+#include <fcntl.h>    // Para open, O_RDONLY, etc.
+#include <unistd.h>   // Para read, close, etc.
+#include <sys/stat.h> // Para mode_t (opcional, dependiendo de tu sistema)
 #include <string>
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
-#include "huff.h"
+#include "huffman.h"
 #include "file_io.h"
+#define BUFFER_SIZE 1024 // Definir BUFFER_SIZE si no está definido
 
-#define BUFFER_SIZE 1024
+#define VERSION "1.0"
+
+void showHelp() {
+    std::cout << "Uso: huffman [opciones] <archivo>\n"
+              << "Opciones:\n"
+              << "  -c, --compress    : Comprime un archivo\n"
+              << "  -x, --decompress  : Descomprime un archivo\n"
+              << "  -h, --help        : Muestra este mensaje de ayuda\n"
+              << "  -v, --version     : Muestra la versión del programa\n";
+}
 
 int main(int argc, char* argv[]) {
-    if (argc < 3) {
-        std::cerr << "Uso: " << argv[0] << " [opciones] <archivo>\n"
-                  << "  -c, --compress    : Comprime un archivo\n"
-                  << "  -x, --decompress  : Descomprime un archivo\n";
+    if (argc < 2) {
+        std::cerr << "Uso incorrecto. Usa -h para ayuda.\n";
         return 1;
     }
 
     std::string opcion = argv[1];
+
+    if (opcion == "-h" || opcion == "--help") {
+        showHelp();
+        return 0;
+    }
+    
+    if (opcion == "-v" || opcion == "--version") {
+        std::cout << "Huffman Compressor v" << VERSION << "\n";
+        return 0;
+    }
+
+    if (argc < 3) {
+        std::cerr << "Uso incorrecto. Usa -h para ayuda.\n";
+        return 1;
+    }
+
     std::string filename = argv[2];
 
     if (opcion == "-c" || opcion == "--compress") {
@@ -51,12 +75,12 @@ int main(int argc, char* argv[]) {
         // Deserializar el árbol de Huffman
         HuffmanNode* root = deserializeHuffmanTree(fdHuff);
 
-        // Leer el contenido comprimido (bytes binarios)
-        std::vector<char> compressedBytes;
+        // Leer el contenido comprimido
+        std::string compressedContent;
         char buffer[BUFFER_SIZE];
         ssize_t bytesRead;
         while ((bytesRead = read(fdHuff, buffer, BUFFER_SIZE)) > 0) {
-            compressedBytes.insert(compressedBytes.end(), buffer, buffer + bytesRead);
+            compressedContent.append(buffer, bytesRead);
         }
 
         close(fdHuff);
@@ -65,8 +89,7 @@ int main(int argc, char* argv[]) {
         huffmanTable.clear();
         generateHuffmanCodes(root, "");
 
-        // Descomprimir los bytes binarios
-        std::string decompressedContent = decompressText(compressedBytes, root);
+        std::string decompressedContent = decompressText(compressedContent, root);
         writeDecompressedFile("archivo_descomprimido.txt", decompressedContent);
 
         delete root;
