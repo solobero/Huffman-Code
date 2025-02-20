@@ -136,8 +136,8 @@ g++ main.o huffman.o file_io.o -o huffman_programa
 Por último para comprimir un archivo de texto y descomprimirlo se usarían los siguientes comandos respectivamente:
 
 ```
-/huffman_programa -c archivo.txt 
-/huffman_programa -x archivo.txt .huff
+./huffman_programa -c archivo.txt 
+./huffman_programa -x archivo.txt 
 ```
 
 Los comandos que se pueden usar son:
