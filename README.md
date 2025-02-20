@@ -44,20 +44,49 @@ Por último, le damos los valores de Huffman a cada símbolo del mensaje origina
 ![Image](https://github.com/user-attachments/assets/a92459ea-837a-49b1-adaa-ba1b73c472ab)
 ## Uso de Llamadas al Sistema
 
-```
+```cpp
 int fd = open(filename, O_RDONLY);
+
+int fdHuff = open(huffFilename.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+int fdTxt = open(txtFilename.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 ```
 
+Se usa con los flags O_RDONLY para lectura o O_WRONLY | O_CREAT | O_TRUNC para escritura, creación y truncamiento si el archivo ya existe.
+
+```cpp
+read(fd, buffer, BUFFER_SIZE); 
+
+read(fd, &marker, 1);
+
+read(fd, &value, sizeof(char));
+
+read(fd, &repetitions, sizeof(int));
 ```
-read(fd, buffer, BUFFER_SIZE);
-```
+
+Se leen los datos desde el archivo txt el cual vamos a comprimir y se almacena en variables o buffers. Cada llamada a read() cumple una función específica en la manipulación del archivo comprimido y del árbol de Huffman
 
 ```
 write(fd, compressedContent.c_str(), compressedContent.size());
+
+ write(fdHuff, compressedContent.c_str(), compressedContent.size());
+
+write(fdTxt, compressedContent.c_str(), compressedContent.size());
+
+write(fd, decompressedContent.c_str(), decompressedContent.size());
+
+write(fd, "1", 1);
+write(fd, &root->value, sizeof(char));
+write(fd, &root->repetitions, sizeof(int));
+
+write(fd, "0", 1);
 ```
 
 ```
 close(fd);
+
+close(fdHuff);
+
+ close(fdTxt);
 ```
 
 ## Comandos para ejecutar
