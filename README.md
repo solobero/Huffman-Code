@@ -74,11 +74,11 @@ write(fdTxt, compressedContent.c_str(), compressedContent.size()); # Guarda la v
 
 write(fd, decompressedContent.c_str(), decompressedContent.size()); # Guarda el texto original
 
-write(fd, "1", 1); # Serialización del árbol de Huffman (nodo hoja)
+write(fd, "1", 1); # Serialización del árbol de Huffman nodo hoja
 write(fd, &root->value, sizeof(char)); # Guarda el carácter en una hoja
 write(fd, &root->repetitions, sizeof(int)); # Guarda la frecuencia del carácter
 
-write(fd, "0", 1); # Serialización del árbol de Huffman (nodo interno )
+write(fd, "0", 1); # Serialización del árbol de Huffman nodo interno 
 ```
 
 ```cpp
