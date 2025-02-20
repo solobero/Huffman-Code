@@ -103,6 +103,7 @@ Escribe un '1' en el archivo para indicar que es una hoja.
 Luego escribe el carácter y la cantidad de repeticiones.
 
 **Nodos internos:**
+
 Escribe un '0' para indicar un nodo interno.
 
 Llama recursivamente a la función para los hijos izquierdo y derecho.
@@ -119,7 +120,7 @@ Si es '0', crea un nodo interno, reconstruyendo sus hijos recursivamente.
 Se leen primero los hijos izquierdos, luego los derechos debido a la estructura recursiva.
 
 ## Comandos para ejecutar
-Para ejecutar el código del algoritmo de Huffman podemos usar el comando "make" para ejecutar todo el código en su totalidad:
+Para ejecutar el código del algoritmo de Huffman podemos usar el comando "make" para ejecutar todo el código en su totalidad (Todo se debe realizar en la localización de la carpeta en la que se encuentre el proyecto):
 
 `make`
 
@@ -140,5 +141,14 @@ Por último para comprimir un archivo de texto y descomprimirlo se usarían los 
 ```
 
 Los comandos que se pueden usar son:
-
+* -c ó --compress para comprimir un archivo de texto
+* -x ó --decompress para descomprimir un archivo .huff
+* -h ó --help para mostrar los comandos que se pueden usar en el programa
+* -v ó --version para ver la versión del programa
+```
+/huffman_programa -c archivo.txt 
+/huffman_programa -x archivo.txt .huff
+/huffman_programa -h 
+/huffman_programa -v
+```
 
