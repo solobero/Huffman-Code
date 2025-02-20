@@ -80,7 +80,7 @@ write(fd, &root->repetitions, sizeof(int)); # Guarda la frecuencia del carácter
 
 write(fd, "0", 1); # Serialización del árbol de Huffman nodo interno 
 ```
-
+Los usamos escribir datos en archivos. Cada una tiene un propósito específico dependiendo del archivo que se esté manipulando. 
 ```cpp
 close(fd); # Cierra el descriptor del archivo después de leer/escribir
 
@@ -88,6 +88,8 @@ close(fdHuff); # Asegura que los datos comprimidos se guarden correctamente
 
  close(fdTxt); # Finaliza la escritura del archivo comprimido en texto
 ```
+
+Los usamos para cerrar archivos una vez que ya no son necesarios. Esto libera recursos del sistema y evita problemas como fugas de descriptores de archivos.
 
 ## Comandos para ejecutar
 Para ejecutar el código del algoritmo de Huffman podemos usar el comando "make" para ejecutar todo el código en su totalidad:
