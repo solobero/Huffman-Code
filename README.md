@@ -91,6 +91,27 @@ close(fdHuff); # Asegura que los datos comprimidos se guarden correctamente
 
 Los usamos para cerrar archivos una vez que ya no son necesarios. Esto libera recursos del sistema y evita problemas como fugas de descriptores de archivos.
 
+### Serialización del Árbol de Huffman
+El proceso de serialización convierte el árbol de Huffman en un formato binario para guardarlo en un archivo.
+
+#### Funcionamiento de serializeHuffmanTree() :
+
+**Nodos hoja (letras):**
+Escribe un '1' en el archivo para indicar que es una hoja.
+Luego escribe el carácter y la cantidad de repeticiones.
+
+**Nodos internos:**
+Escribe un '0' para indicar un nodo interno.
+Llama recursivamente a la función para los hijos izquierdo y derecho.
+
+### El proceso de deserialización reconstruye el árbol de Huffman a partir del archivo guardado.
+
+#### Funcionamiento de deserializeHuffmanTree()
+**Lee el primer byte:**
+Si es '1', crea un nodo hoja con su valor y frecuencia.
+Si es '0', crea un nodo interno, reconstruyendo sus hijos recursivamente.
+Se leen primero los hijos izquierdos, luego los derechos debido a la estructura recursiva.
+
 ## Comandos para ejecutar
 Para ejecutar el código del algoritmo de Huffman podemos usar el comando "make" para ejecutar todo el código en su totalidad:
 
