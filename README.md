@@ -129,7 +129,7 @@ Si se quiere ejecutar manualmente archivo por archivo se usarían:
 ```
 g++ -c main.cpp -o main.o
 g++ -c file_io.cpp -o file_io.o
-g++ -c huffman.cpp -o huffman.o
+g++ -c huff.cpp -o huff.o
 g++ main.o huffman.o file_io.o -o huffman_programa
 ```
 
@@ -146,9 +146,9 @@ Los comandos que se pueden usar son:
 * -h ó --help para mostrar los comandos que se pueden usar en el programa
 * -v ó --version para ver la versión del programa
 ```
-/huffman_programa -c archivo.txt 
-/huffman_programa -x archivo.txt .huff
-/huffman_programa -h 
-/huffman_programa -v
+./huffman_programa -c archivo.txt 
+./huffman_programa -x archivo.txt 
+./huffman_programa -h 
+./huffman_programa -v
 ```
 
